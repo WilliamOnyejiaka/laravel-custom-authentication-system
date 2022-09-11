@@ -13,8 +13,7 @@
                 </i>
             </div>
             <div class="form-group mt-2">
-                <input type="email" name="signUpEmail" class="form-style" placeholder="Your Email" id="signUpEmail"
-                    autocomplete="off">
+                <input type="email" name="signUpEmail" class="form-style" placeholder="Your Email" id="signUpEmail">
                 <i class="input-icon uil uil-at"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         fill="currentColor" class="bi bi-at" viewBox="0 0 16 16">
                         <path
@@ -31,6 +30,7 @@
                             d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
                     </svg>
                 </i>
+
             </div>
 
             <div class="form-group mt-2 form-switch">
@@ -38,7 +38,7 @@
                 <label class="form-check-label" id="signUpFormCheckLabel" for="sigshow">Show Password</label>
             </div>
 
-            <a href="#" class="btn mt-4">submit</a>
+            <a href="#" id="signUp-btn" class="btn mt-4">submit</a>
         </div>
     </div>
 </div>

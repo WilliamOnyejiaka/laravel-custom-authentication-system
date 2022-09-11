@@ -1,3 +1,3 @@
-import { signUp } from "./signUp.js";
+import { authService } from "./authService.js";
 
-export {signUp};
+export { authService };

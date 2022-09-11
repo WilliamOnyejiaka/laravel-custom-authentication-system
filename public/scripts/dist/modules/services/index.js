@@ -1,2 +1,2 @@
-import { signUp } from "./signUp.js";
-export { signUp };
+import { authService } from "./authService.js";
+export { authService };

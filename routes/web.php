@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +16,14 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.auth-page');
+Route::get('/', fn() => redirect(route("authPage")));
+Route::get('/home',[HomeController::class,'homePage'])->name("home");
+Route::get('/authentication',[AuthController::class, 'authenticationPage'])->name("authPage");
+
+Route::get('/test',function () {
+    return view('pages.test');
 });
 
-Route::post('/sign-up',[AuthController::class, 'signUpAuthentication']);
+Route::post('/sign-up',[AuthController::class, 'signUpAuthentication'])->name('signUp');
+Route::post('/login', [AuthController::class, 'loginAuthentication'])->name("login");
+

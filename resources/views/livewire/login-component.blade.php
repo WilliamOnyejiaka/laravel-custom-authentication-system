@@ -27,7 +27,7 @@
                 <input class="form-check-input" type="checkbox" id="logshow">
                 <label class="form-check-label" id="loginFormCheckLabel" for="logshow">Show Password</label>
             </div>
-            <a href="#" class="btn mt-4">submit</a>
+            <a href="#" id="login-btn" class="btn mt-4">submit</a>
         </div>
     </div>
 </div>

@@ -16,11 +16,10 @@ const signUp = (name, email, password, token) => __awaiter(void 0, void 0, void 
             email: email,
             password: password,
         }),
-        headers: new Headers({
+        headers: {
             "content-type": "application/json",
-            Authorization: `Basic ${window.btoa(email + ":" + password)}`,
             'X-CSRF-TOKEN': token,
-        }),
+        },
     });
     return yield response.json();
 });
