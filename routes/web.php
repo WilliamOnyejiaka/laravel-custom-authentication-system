@@ -26,4 +26,6 @@ Route::get('/test',function () {
 
 Route::post('/sign-up',[AuthController::class, 'signUpAuthentication'])->name('signUp');
 Route::post('/login', [AuthController::class, 'loginAuthentication'])->name("login");
+Route::get('/logOut', [AuthController::class, 'logOut'])->name("logOut");
+
 

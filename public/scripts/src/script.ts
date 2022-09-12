@@ -32,7 +32,6 @@ signUpShowPassword.addEventListener(
     toggleShowPassword(signUpShowPassword, "signUp")
 );
 
-
 signUpBtn.addEventListener("click", async (e) => {
     const token: string = getTokenFromMeta()!;
     const name: string = signUpName.value.trim();
@@ -47,16 +46,16 @@ signUpBtn.addEventListener("click", async (e) => {
         alert("password must have at least four characters");
     } else {
         const body = {
-            name:name,
-            email:email,
-            password:password,
+            name: name,
+            email: email,
+            password: password,
         };
-        const data = await authService(body,"sign-up", token);
+        const data = await authService(body, "sign-up", token);
 
-        if(data.error){
+        if (data.error) {
             alert(data.message);
+            return;
         }
-        alert(data.message);
         window.location.reload();
     }
 });
@@ -66,21 +65,26 @@ loginUpShowPassword.addEventListener(
     toggleShowPassword(loginUpShowPassword, "login")
 );
 
-loginBtn.addEventListener("click",async e => {
-    const email:string = loginEmail.value;
-    const password:string = loginPassword.value;
-    const body:any = {
-        name:"Will",
-        email:"email@email.com",
-        password:"password",
-    };
+loginBtn.addEventListener("click", async (e) => {
+    const email: string = loginEmail.value;
+    const password: string = loginPassword.value;
+    const token: string = getTokenFromMeta()!;
 
-    for(const key in body){
-        console.log(`${key}  ${body[key]}`);
+    if (email.length < 1) {
+        alert("email can not be empty");
+    } else if (password.length < 1) {
+        alert("password can not be empty");
+    } else {
+        const body: any = {
+            email: email,
+            password: password,
+        };
+        const data = await authService(body, "login", token);
 
+        if (data.error) {
+            alert(data.message);
+            return;
+        }
+        window.location.href = "/home";
     }
-
-    console.log(`${email}  ${password}`);
-
 });
-

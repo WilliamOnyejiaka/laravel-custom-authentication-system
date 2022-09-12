@@ -46,8 +46,8 @@ signUpBtn.addEventListener("click", (e) => __awaiter(void 0, void 0, void 0, fun
         const data = yield authService(body, "sign-up", token);
         if (data.error) {
             alert(data.message);
+            return;
         }
-        alert(data.message);
         window.location.reload();
     }
 }));
@@ -55,13 +55,23 @@ loginUpShowPassword.addEventListener("click", toggleShowPassword(loginUpShowPass
 loginBtn.addEventListener("click", (e) => __awaiter(void 0, void 0, void 0, function* () {
     const email = loginEmail.value;
     const password = loginPassword.value;
-    const body = {
-        name: "Will",
-        email: "email@email.com",
-        password: "password",
-    };
-    for (const key in body) {
-        console.log(`${key}  ${body[key]}`);
+    const token = getTokenFromMeta();
+    if (email.length < 1) {
+        alert("email can not be empty");
     }
-    console.log(`${email}  ${password}`);
+    else if (password.length < 1) {
+        alert("password can not be empty");
+    }
+    else {
+        const body = {
+            email: email,
+            password: password,
+        };
+        const data = yield authService(body, "login", token);
+        if (data.error) {
+            alert(data.message);
+            return;
+        }
+        window.location.href = "/home";
+    }
 }));

@@ -59,9 +59,37 @@ class AuthController extends Controller
 
     public function loginAuthentication(Request $request){
         $body = json_decode($request->getContent());
-        return Response::json([
-            'error' => false,
-            "message" => $body,
-        ]);
+        $email = $body->email ?? false;
+        $password = $body->password ?? false;
+
+        if(!$email){
+            return Response::json(responseErrorMessage("email missing"),400);
+        }
+        if (!$password) {
+            return Response::json(responseErrorMessage("password missing"), 400);
+        }
+
+        $user = User::where('email',$email)->first();
+        if($user){
+            if(Hash::check($password,$user->password)){
+                Session::put("userId",$user->id);
+                return Response::json([
+                    'error' => false,
+                    'message' => "logged in",
+                ],200);
+            }
+            return Response::json([
+                'error' => true,
+                'message' => "invalid credentials",
+            ],400);
+        }
+        return Response::json(responseErrorMessage("email does not exist"),400);
+    }
+
+    public function logOut(Request $request){
+        if(Session::has("userId")){
+            Session::pull("userId");
+            return redirect("authentication");
+        }
     }
 }
