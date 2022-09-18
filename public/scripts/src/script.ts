@@ -1,4 +1,4 @@
-import { toggleShowPassword, getTokenFromMeta } from "./modules/DOM/index.js";
+import { toggleShowPassword, getTokenFromMeta,displayError } from "./modules/DOM/index.js";
 import { authService } from "./modules/services/index.js";
 
 const signUpShowPassword = document.querySelector(
@@ -21,6 +21,16 @@ const signUpPassword = document.querySelector(
 const signUpBtn = document.querySelector("#signUp-btn") as HTMLLinkElement;
 const loginBtn = document.querySelector("#login-btn") as HTMLLinkElement;
 
+const modal = document.querySelector(".modal") as HTMLDivElement;
+
+const modalCloseBtn = document.querySelector(
+    "#modal-close"
+) as HTMLButtonElement;
+
+modalCloseBtn.addEventListener("click", () => {
+    modal.classList.remove("show");
+});
+
 function validateEmail(email: string): boolean {
     const emailRegex =
         /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -39,11 +49,11 @@ signUpBtn.addEventListener("click", async (e) => {
     const password: string = signUpPassword.value;
 
     if (name.length < 1) {
-        alert("name should contain at least one character");
+        displayError("name should contain at least one character");
     } else if (!validateEmail(email)) {
-        alert("a valid email is needed");
+        displayError("a valid email is needed");
     } else if (password.length < 4) {
-        alert("password must have at least four characters");
+        displayError("password must have at least four characters");
     } else {
         const body = {
             name: name,
@@ -53,7 +63,7 @@ signUpBtn.addEventListener("click", async (e) => {
         const data = await authService(body, "sign-up", token);
 
         if (data.error) {
-            alert(data.message);
+            displayError(data.message);
             return;
         }
         window.location.reload();
@@ -71,9 +81,9 @@ loginBtn.addEventListener("click", async (e) => {
     const token: string = getTokenFromMeta()!;
 
     if (email.length < 1) {
-        alert("email can not be empty");
+        displayError("email can not be empty");
     } else if (password.length < 1) {
-        alert("password can not be empty");
+        displayError("password can not be empty");
     } else {
         const body: any = {
             email: email,
@@ -82,7 +92,7 @@ loginBtn.addEventListener("click", async (e) => {
         const data = await authService(body, "login", token);
 
         if (data.error) {
-            alert(data.message);
+            displayError(data.message);
             return;
         }
         window.location.href = "/home";

@@ -15,7 +15,7 @@
                                 <livewire:login-component />
 
                                 <livewire:signup-component />
-                                
+
                             </div>
                         </div>
                     </div>
@@ -23,4 +23,5 @@
             </div>
         </div>
     </div>
+    <livewire:modal/>
 @endsection
